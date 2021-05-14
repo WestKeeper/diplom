@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Обучение модели
+{% endblock %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Выбор датасета для обучения модели
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-circle-o"></i>Выбор датасета для обучения модели</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    <!-- Main row -->
+      <div class="row">
+      <div class="col-xs-12">
+              <!-- TO DO List -->
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">Датасет</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="todo-list">
+                <li>
+                  <!-- checkbox -->
+                  <!-- todo text -->
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                      Student-dataset.xlsx
+                    </label>
+                  </div>
+
+
+                </li>
+                <li>
+                    <div class="radio">
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                      Another-one-dataset.xlsx
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+              <div class="box-footer clearfix no-border">
+              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Обучить модель</button>
+            </div>
+          </div>
+          <!-- /.box -->
+      </div>
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+{% endblock %}

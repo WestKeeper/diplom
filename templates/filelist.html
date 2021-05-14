@@ -32,7 +32,7 @@
           <div class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
-              <h3 class="box-title">Выберите датасет для обработки и визуализации</h3>
+              <h3 class="box-title">Загруженные датасеты</h3>
 
             </div>
             <!-- /.box-header -->
@@ -129,4 +129,9 @@
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->
+
+
+{% endblock %}
+{% block extrajs %}
+<script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
 {% endblock %}

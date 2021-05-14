@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Прогнозирование успеваемости
+{% endblock %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Прогнозирование успеваемости студента
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-circle-o"></i> Прогнозирование успеваемости студента</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+<!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Ввод характеристик студента</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Курс</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Курс">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Признак 2</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Признак 2">
+                </div>
+
+                <!-- .form-group -->
+                <div class="form-group">
+                <label>Школа</label>
+                <select class="form-control select2" style="width: 100%;">
+                  <option selected="selected">ИШПР</option>
+                  <option>ИШИТР</option>
+                  <option>ИШЭ</option>
+                  <option>ИШЯТ</option>
+                  <option>ШИП</option>
+                </select>
+              </div>
+              <!-- /.form-group -->
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Состоит ли в академическом обмене
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+          <!-- /.box -->
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+
+
+          <!-- general form elements disabled -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <button type="button" class="btn btn-block btn-success btn-lg">Спрогнозировать успеваемость</button>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+{% endblock %}
