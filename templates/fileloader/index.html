@@ -1,0 +1,60 @@
+<!-- templates/index.html -->
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static "css/basic.css" %}">
+        <link rel="stylesheet" href="{% static "css/dropzone.css" %}">
+        <title>Drag'n'drop</title>
+
+    </head>
+
+    <body>
+        <div id="dropzone">
+            <form action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload"
+                  enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <div class="dz-message needsclick">
+                    <button type="button" class="dz-button">
+                        Drop files here or click to upload
+                    </button>
+                </div>
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+    {#            <button type="submit" id="button">Upload</button>#}
+            </form>
+        </div>
+
+{#        <form enctype="multipart/form-data" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{#            <button type="submit" id="button">Upload</button>#}
+{#        </form>#}
+
+        <form>
+            {{ form2 }}
+        </form>
+
+        <div class="function">
+{#            <form action="/cleaned">#}
+{#                <button type="submit" id="button">К функциям</button>#}
+{#            </form>#}
+            <form action="/processed" method="post">
+                {% csrf_token %}
+                {{ func_file_name.as_p }}
+                <button type="submit" id="button">Do func</button>
+            </form>
+        </div>
+
+        <div class="ml-model">
+            <form action="/ml_model" method="post">
+                {% csrf_token %}
+                <button type="submit" id="button-train">Train</button>
+                <button type="submit" id="button-pred">Predict</button>
+            </form>
+        </div>
+
+        <script src={% static "js/dropzone-5.7.0/dist/dropzone.js" %}></script>
+    </body>
+</html>
