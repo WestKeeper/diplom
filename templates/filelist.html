@@ -3,6 +3,10 @@
 {% block title %}
     Список датасетов
 {% endblock %}
+{% block extracss %}
+    <link rel="stylesheet" href="{% static "css/basic.css" %}">
+    <link rel="stylesheet" href="{% static "css/dropzone.css" %}">
+{% endblock %}
 {% block content %}
 
   <!-- Content Wrapper. Contains page content -->
@@ -72,6 +76,12 @@
             <div class="box-footer clearfix no-border">
               <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Добавить датасет</button>
             </div>
+          <form action="/upload"
+              class="dropzone"
+              id="my-dropzone" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+          </form>
+
           </div>
           <!-- /.box -->
 
@@ -134,4 +144,5 @@
 {% endblock %}
 {% block extrajs %}
 <script src="{% static 'dist/js/pages/dashboard.js' %}"></script>
+<script src="{% static 'js/dropzone.js' %}"></script>
 {% endblock %}
