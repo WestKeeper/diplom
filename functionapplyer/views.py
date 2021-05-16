@@ -7,6 +7,7 @@ import pandas as pd
 import re
 
 
+
 RAW_FILE_CHOICES_DICT = {}
 PREP_FILE_CHOICES_DICT = {}
 FUNC_CHOICES_DICT = {1: 'encode_personal_data',
@@ -88,10 +89,6 @@ def func_pipeline(request):
                         numeric_cols.remove(col)
                 string += f'-DUC'
 
-            if 'delete_extra_disciplines' in funcnames:
-                delete_extra_disciplines(df)
-                string += f'-DED'
-
             if 'delete_linear_dependencies' in funcnames:
                 delete_linear_dependencies(df)
                 string += f'-DLD'
@@ -107,6 +104,10 @@ def func_pipeline(request):
             if 'clean_missings_fillna' in funcnames:
                 clean_missings_fillna(df, category_cols, numeric_cols)
                 string += f'-CMF'
+
+            if 'delete_extra_disciplines' in funcnames:
+                delete_extra_disciplines(df)
+                string += f'-DED'
 
             if 'reformat_cols_type' in funcnames:
                 reformat_cols_type(df, category_cols, numeric_cols)
@@ -147,7 +148,8 @@ def clean_missings_dropna(df):
 
 
 def clean_missings_fillna(df, category_cols, numeric_cols):
-    df[category_cols].fillna(value='Нет', inplace=True)
+    for cat_col in category_cols:
+        df[cat_col].fillna(value='Нет', inplace=True)
     for col in numeric_cols:
         df[col].fillna(value=df[col].median(), inplace=True)
 

@@ -50,11 +50,17 @@
         <div class="ml-model">
             <form action="/ml_model" method="post">
                 {% csrf_token %}
+                {{ form_model.as_p }}
                 <button type="submit" id="button-train">Train</button>
-                <button type="submit" id="button-pred">Predict</button>
+{#                <button type="submit" id="button-pred">Predict</button>#}
+            </form>
+            <form action="/ml_model_predict">
+                <button type="submit">To Predict</button>
             </form>
         </div>
 
         <script src={% static "js/dropzone-5.7.0/dist/dropzone.js" %}></script>
+        <script src={% static "js/test_statistics.js" %}></script>
+        <script type="application/json" src={% static "js/test_data.json" %}></script>
     </body>
 </html>

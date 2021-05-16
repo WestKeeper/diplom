@@ -1,7 +1,23 @@
+import os
 from django import forms
 
+PREP_FILE_CHOICES = []
 
-# class MLModelForm(forms.Form):
-#     raw_file_name = forms.ChoiceField(choices=RAW_FILE_CHOICES, required=False, widget=forms.RadioSelect)
-#     prep_file_name = forms.ChoiceField(choices=PREP_FILE_CHOICES, required=False, widget=forms.RadioSelect)
-    # model_name = forms.ChoiceField(choices=FUNC_CHOICES, widget=forms.RadioSelect)
+
+def file_choice_update(path, filename):
+    x = globals()
+    x[filename] = []
+    tmp = os.listdir(path=path)
+    inc = 1
+    for el in tmp:
+        x[filename].append((inc, el))
+        inc += 1
+    print('func applied')
+    print(x[filename])
+
+
+file_choice_update('uploads/datasets_prepared', 'PREP_FILE_CHOICES')
+
+
+class MLModelForm(forms.Form):
+    prep_file_name = forms.ChoiceField(choices=PREP_FILE_CHOICES, widget=forms.RadioSelect)

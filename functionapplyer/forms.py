@@ -25,8 +25,8 @@ def file_choice_update(path, filename):
     for el in tmp:
         x[filename].append((inc, el))
         inc += 1
-    print('func applied')
-    print(x[filename])
+    # print('func applied')
+    # print(x[filename])
 
 
 file_choice_update('uploads/datasets', 'RAW_FILE_CHOICES')
@@ -36,7 +36,7 @@ file_choice_update('uploads/datasets_prepared', 'PREP_FILE_CHOICES')
 def filestorage_update_activator():
     file_choice_update('uploads/datasets', 'RAW_FILE_CHOICES')
     file_choice_update('uploads/datasets_prepared', 'PREP_FILE_CHOICES')
-    print('updated')
+    # print('updated')
 
 
 class FuncFileNameForm(forms.Form):
@@ -46,8 +46,8 @@ class FuncFileNameForm(forms.Form):
 
     def set_raw_file_name(self, value):
         self.raw_file_name = forms.ChoiceField(choices=value, required=False, widget=forms.RadioSelect)
-        print('raw installed')
+        # print('raw installed')
 
     def set_prep_file_name(self, value):
         self.prep_file_name = forms.ChoiceField(choices=value, required=False, widget=forms.RadioSelect)
-        print('prep installed')
+        # print('prep installed')
