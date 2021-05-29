@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Прогнозирование успеваемости
+{% endblock %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Прогнозирование успеваемости студента
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a><i class="fa fa-circle-o"></i> Прогнозирование успеваемости студента</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <form method="post">
+        {% csrf_token %}
+<!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Ввод характеристик студента</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+              <div class="box-body">
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Форма обучения</label>
+                {{ form.educ_form }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Квалификация</label>
+                {{ form.qualification }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Курс</label>
+                {{ form.course }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Профиль</label>
+                {{ form.profile }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Выпускающее отделение</label>
+                {{ form.dep }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Обучающее подразделение</label>
+                {{ form.subdep }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Форма финансирования</label>
+                {{ form.fin }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Гражданство</label>
+                {{ form.citizenship }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Пол</label>
+                {{ form.gender }}
+              </div>
+              <!-- /.form-group -->
+              <!-- .form-group -->
+              <div class="form-group">
+                <label>Наличие академического отпуска</label>
+                {{ form.vacation }}
+{#              </div>#}
+{#              <div class="form-group">#}
+{#                <label>Пропусков по дисциплинам, по которым получены неудовлетворительные оценки</label>#}
+{#                {{ form.fail_missings }}#}
+{#              </div>#}
+{#              <div class="form-group">#}
+{#                <label>Всего пропусков в семестре</label>#}
+{#                {{ form.total_missings }}#}
+              </div>
+              <div class="form-group">
+                <label>Всего часов аудиторных занятий в семестре</label>
+                {{ form.educ_hours }}
+              </div>
+              <!-- /.form-group -->
+
+          </div></div>
+          <!-- /.box -->
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+
+
+          <!-- general form elements disabled -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <button type="submit" class="btn btn-block btn-success btn-lg">Спрогнозировать успеваемость</button>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+        </section>
+        <!-- right col -->
+      </div>
+      </form>
+      </section>
+      </div>
+      <!-- /.row (main row) -->
+{% endblock %}

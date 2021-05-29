@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Результат прогнозирования
+{% endblock %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Результат прогнозирования
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a><i class="fa fa-circle-o"></i>Результат прогнозирования</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    <!-- Main row -->
+      <div class="row">
+      <div class="col-xs-12">
+          <div class="box {% if stud_class == 2 %}box-success
+                    {% elif stud_class == 1 %}box-info
+                    {% else %}box-danger
+                    {% endif %}">
+            <div class="box-header with-border">
+              <i class="fa fa-bullhorn"></i>
+
+              <h3 class="box-title">Инфо</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="callout {% if stud_class == 2 %}callout-success
+                    {% elif stud_class == 1 %}callout-info
+                    {% else %}callout-danger
+                    {% endif %}">
+                <h4>{% if stud_class == 2 %}Успех
+                    {% elif stud_class == 1 %}В пределах нормы
+                    {% else %}Провал
+                    {% endif %}</h4>
+
+                <p>Скорее всего, данный студент
+                    {% if stud_class == 2 %}будет успешен в учебе.
+                    {% elif stud_class == 1 %}будет учиться средне.
+                    {% else %}будет неуспешен в учебе. Возможно, стоит обратить на него внимание.
+                    {% endif %}</p>
+              <p>Уверенность в прогнозе модели составляет {{ stud_prob }}.</p>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+{% endblock %}

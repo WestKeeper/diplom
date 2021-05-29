@@ -1,0 +1,1 @@
+LineChartData = '[{"labels": ["\u0416\u0435\u043d\u0441\u043a\u0438\u0439", "\u041c\u0443\u0436\u0441\u043a\u043e\u0439"], "datasets": [{"label": "C", "data": "a"}, {"label": 4592, "data": 2114}]}]'

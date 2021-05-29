@@ -15,31 +15,31 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Основные функции</li>
-        <li class="active treeview">
-          <a href="#">
+        <li class="treeview">
+          <a href="{% url 'data_loader:filelist' %}">
             <i class="fa fa-table"></i> <span>Список датасетов</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{% url 'data_processor:dataset_process' %}">
             <i class="fa fa-files-o"></i>
             <span>Обработать датасет</span>
           </a>
         </li>
         <li>
-          <a href="{% static 'pages/widgets.html' %}">
+          <a href="{% url 'data_visualizer:dataset_stat' %}">
             <i class="fa fa-pie-chart"></i> <span>Вывод статистики</span>
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{% url 'report_controller:dataset_report' %}">
             <i class="fa fa-folder"></i>
             <span>Сохранить отчёт</span>
           </a>
         </li>
         <li class="header">Дополнительно</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Обучить модель</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-green"></i> <span>Предсказать результат</span></a></li>
+        <li><a href={% url 'predict_model_controller:dataset_teaching_model' %}><i class="fa fa-circle-o text-red"></i> <span>Обучить модель</span></a></li>
+        <li><a href="{% url 'predict_model_controller:predict_form' %}"><i class="fa fa-circle-o text-green"></i> <span>Предсказать результат</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

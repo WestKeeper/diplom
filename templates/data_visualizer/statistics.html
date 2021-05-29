@@ -1,0 +1,401 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Статистика по датасету
+{% endblock %}
+{% block extracss %}
+        {% for df_cat_col in df_cat_cols %}
+		    <script type="text/javascript" src="{% static 'chart-txt/BarChartData-'|add:df_cat_col|add:'.txt' %}"></script>
+            <script type="text/javascript" src="{% static 'chart-txt/CatplotChartData-'|add:df_cat_col|add:'.txt' %}"></script>
+            <script type="text/javascript" src="{% static 'chart-txt/QQChartData-'|add:df_cat_col|add:'.txt' %}"></script>
+            <script type="text/javascript" src="{% static 'chart-txt/QQChartData-Не_'|add:df_cat_col|add:'.txt' %}"></script>
+        {% endfor %}
+        {% for df_num_col in df_num_cols %}
+		    <script type="text/javascript" src="{% static 'chart-txt/BarChartData-'|add:df_num_col|add:'.txt' %}"></script>
+            <script type="text/javascript" src="{% static 'chart-txt/BoxplotChartData-'|add:df_num_col|add:'.txt' %}"></script>
+        {% endfor %}
+		<script type="text/javascript" src="{% static "chart-txt/CatplotChartData.txt" %}"></script>
+
+		<script type="text/javascript" src="{% static "chart-txt/QQChartData-0" %}.txt"></script>
+		<script type="text/javascript" src="{% static "chart-txt/QQChartData-1.txt" %}"></script>
+
+		<script type="text/javascript" src="{% static "chart-txt/CatplotChartData-0.txt" %}"></script>
+
+
+        <script type="text/javascript" src="{% static "js/data_loader.js" %}"></script>
+
+		<script src="{% static "js/chart.js" %}"></script>
+		<script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-core.min.js"></script>
+		<script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-cartesian.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Статистика по датасету
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a><i class="fa fa-pie-chart"></i> Статистика по датасету</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+<!-- Main row -->
+      <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Сводка по числовым признакам</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow: auto;">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+
+                  {% for desc_col in desc_cols %}
+                      <th>{{ desc_col }}</th>
+                  {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+
+                  {% for df_el in df_list %}
+                        <tr>
+                           {% for value in df_el %}
+                              <td>{{ value }}</td>
+                             {% endfor %}
+                        </tr>
+                  {% endfor %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+
+                  {% for desc_col in desc_cols %}
+                      <th>{{ desc_col }}</th>
+                  {% endfor %}
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+      </div>
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+
+         {% for df_cat_col in df_cat_cols %}
+              <!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Bar Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="histogram{{ df_cat_col }}"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         {% endfor %}
+
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+        {% for df_num_col in df_num_cols %}
+              <!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Bar Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="histogram{{ df_num_col }}"></canvas>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         {% endfor %}
+        {% for df_num_col in df_num_cols %}
+              <!-- BAR CHART -->
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Boxplot</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <div id="boxplot{{ df_num_col }}" style="height: 500px;"></div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+         {% endfor %}
+
+        </section>
+        <!-- right col -->
+
+      <div class="col-xs-12">
+      <h1 style="font-size: 24px;">
+        Поиск скрытых зависимостей
+      </h1>
+
+        {% for p_el in p_list %}
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">Признак {{ p_el.feature }}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" >
+                <div style="display: flex; flex-direction: row; justify-content: center;">
+                <div class="chart">
+                    <canvas id="catplot{{ p_el.feature }}"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas></canvas>
+                </div>
+                </div>
+
+                <div style="display: flex; flex-direction: row; justify-content: center;">
+                    <div class="chart">
+                        <canvas id="qq_plot{{ p_el.feature }}"></canvas>
+                    </div>
+                    <div class="chart">
+                        <canvas id="qq_plotНе_{{ p_el.feature }}"></canvas>
+                    </div>
+                </div>
+                    <div class="box-text">
+                        <h4><p class="text-light-blue" style="display: inline-block;">P-значение критерия Шапиро-Уилка</p> равно <p class="lead" style="display: inline-block;">{{ p_el.p_value1 }} и {{ p_el.p_value1 }}</p> соответственно.
+                    </h4>{% if p_el.i_norm == 1 %}
+                        <h4>Распределение <p class="text-light-blue" style="display: inline-block;">нормальное</p>. Использован t-критерий Стьюдента.</h4>
+                    {% elif p_el.i_norm == 0 %}<h4>Распределение <p class="text-light-blue" style="display: inline-block;">ненормальное</p>. Использован критерий Манна-Уитни. </h4>{% endif %}
+                        <h4><p class="text-light-blue" style="display: inline-block;">P-значение {% if p_el.i_norm == 1 %}t-критерия Стьюдента{% elif p_el.i_norm == 0 %}критерия Манна-Уитни{% endif %}</p> равно <p class="lead" style="display: inline-block;">{{ p_el.pval }}</p>.</h4>
+                        <br>
+                    {% if p_el.pval < 0.01 %}
+                        <h4>Студенты, обладающие значением <p class="text-light-blue" style="display: inline-block;">{{ p_el.feature_value }}</p> признака <p class="text-light-blue" style="display: inline-block;">{{ p_el.feature }}</p> обучаются <p class="text-green" style="display: inline-block;">успешнее.</p></h4>
+                    {% else %}
+                    <h4>Вывода по данному признаку <p class="text-red" style="display: inline-block;"> сформировать не удалось.</p></h4>
+                    {% endif %}
+                    </div>
+
+
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+                {% endfor %}
+      </div>
+      </div>
+      <!-- /.row (main row) -->
+    </section>
+      </div>
+
+
+
+{% endblock %}
+
+{% block extrajs %}
+<!-- ChartJS 1.0.1 -->
+<script>
+			// histogram
+			// here may be Django
+            {% for df_cat_col in df_cat_cols %}
+
+			var hist_data = load(BarChartData{{ df_cat_col }});
+			const hist_chart_data{{ df_cat_col }} = {
+			  labels: hist_data[0].labels,
+			  datasets: [{
+				label: hist_data[0].datasets[0].label,
+				data: hist_data[0].datasets[0].data,
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+			  }]
+			};
+
+			const hist_config{{ df_cat_col }} = {
+			  type: 'bar',
+			  data: hist_chart_data{{ df_cat_col }},
+			  options: {}
+			};
+
+			new Chart(
+				document.getElementById('histogram{{ df_cat_col }}'),
+				hist_config{{ df_cat_col }}
+			);
+
+			{% endfor %}
+            {% for df_num_col in df_num_cols %}
+
+			var hist_data = load(BarChartData{{ df_num_col }});
+			const hist_chart_data{{ df_num_col }} = {
+			  labels: hist_data[0].labels,
+			  datasets: [{
+				label: hist_data[0].datasets[0].label,
+				data: hist_data[0].datasets[0].data,
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+			  }]
+			};
+
+			const hist_config{{ df_num_col }} = {
+			  type: 'bar',
+			  data: hist_chart_data{{ df_num_col }},
+			  options: {}
+			};
+
+			new Chart(
+				document.getElementById('histogram{{ df_num_col }}'),
+				hist_config{{ df_num_col }}
+			);
+
+			{% endfor %}
+            {% for df_num_col in df_num_cols %}
+			// boxplot
+			var boxplot_data = load(BoxplotChartData{{ df_num_col }});
+			// create a chart
+			boxplot_chart = anychart.box();
+			// create a box series and set the data
+			series = boxplot_chart.box(boxplot_data[0].data);
+			// set the chart title
+			var title = boxplot_chart.title("Диаграмма размаха признака {{ df_num_col }}");
+			// set the interactivity mode
+			// chart.interactivity("by-x");
+			// set the container id
+			boxplot_chart.container("boxplot{{ df_num_col }}");
+			// initiate drawing the chart
+			boxplot_chart.draw();
+			{% endfor %}
+
+            {% for df_cat_col in df_cat_cols %}
+			// q-q plot
+			var q_q_plot_data{{ df_cat_col }} = load(QQChartData{{ df_cat_col }});
+			const qq_data{{ df_cat_col }} = {
+				labels: q_q_plot_data{{ df_cat_col }}[0].labels,
+				datasets: [{
+					type: 'scatter',
+					label: q_q_plot_data{{ df_cat_col }}[0].label,
+					data: q_q_plot_data{{ df_cat_col }}[0].scatter_data,
+					backgroundColor: 'rgb(127, 99, 132)'
+				}, {
+					type: 'line',
+					label: "Нормаль",
+					data: q_q_plot_data{{ df_cat_col }}[0].line_data,
+					backgroundColor: 'rgb(227, 99, 132)',
+					borderColor: 'rgb(227, 99, 132)'
+				}]
+			};
+			const qq_config{{ df_cat_col }} = {
+				type: 'scatter',
+				data: qq_data{{ df_cat_col }},
+				options: {
+					scales: {
+						x: {
+							type: 'linear',
+							position: 'bottom'
+						}
+					}
+				}
+			};
+			new Chart(
+				document.getElementById('qq_plot{{ df_cat_col }}'),
+				qq_config{{ df_cat_col }}
+			);
+
+			var q_q_plot_dataНе_{{ df_cat_col }} = load(QQChartDataНе_{{ df_cat_col }});
+			const qq_dataНе_{{ df_cat_col }} = {
+				labels: q_q_plot_dataНе_{{ df_cat_col }}[0].labels,
+				datasets: [{
+					type: 'scatter',
+					label: q_q_plot_dataНе_{{ df_cat_col }}[0].label,
+					data: q_q_plot_dataНе_{{ df_cat_col }}[0].scatter_data,
+					backgroundColor: 'rgb(127, 99, 132)'
+				}, {
+					type: 'line',
+					label: "Нормаль",
+					data: q_q_plot_dataНе_{{ df_cat_col }}[0].line_data,
+					backgroundColor: 'rgb(227, 99, 132)',
+					borderColor: 'rgb(227, 99, 132)'
+				}]
+			};
+			const qq_configНе_{{ df_cat_col }} = {
+				type: 'scatter',
+				data: qq_dataНе_{{ df_cat_col }},
+				options: {
+					scales: {
+						x: {
+							type: 'linear',
+							position: 'bottom'
+						}
+					}
+				}
+			};
+			new Chart(
+				document.getElementById('qq_plotНе_{{ df_cat_col }}'),
+				qq_configНе_{{ df_cat_col }}
+			);
+			{% endfor %}
+
+
+			// catplot
+
+            {% for df_cat_col in df_cat_cols %}
+			var catplot_data{{ df_cat_col }} = load(CatplotChartData{{ df_cat_col }});
+			const catplot_chart_data{{ df_cat_col }} = {
+			  labels: catplot_data{{ df_cat_col }}[0].labels,
+			  datasets: [{
+				label: catplot_data{{ df_cat_col }}[0].label,
+				data: catplot_data{{ df_cat_col }}[0].datasets,
+				backgroundColor: 'rgb(255, 99, 132)',
+				borderColor: 'rgb(255, 99, 132)',
+			  }]
+			 };
+
+			const catplot_config{{ df_cat_col }} = {
+			  type: 'line',
+			  data: catplot_chart_data{{ df_cat_col }},
+			  lineAtIndex: ["Мужской", "Женский"],
+			  options: {}
+			 };
+
+			new Chart(
+				document.getElementById('catplot{{ df_cat_col }}'),
+				catplot_config{{ df_cat_col }}
+			);
+			{% endfor %}
+
+		</script>
+<script src="{% static 'plugins/chartjs/Chart.min.js' %}"></script>
+<script src="{% static 'js/statistics.js' %}"></script>
+{% endblock %}

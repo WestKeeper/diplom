@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Обучение модели
+{% endblock %}
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Выбор датасета для обучения модели
+        <small>XLSX</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a><i class="fa fa-circle-o"></i>Выбор датасета для обучения модели</a></li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    <!-- Main row -->
+      <div class="row">
+      <div class="col-xs-12">
+      </div>
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <!-- TO DO List -->
+          <div class="box box-primary">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">Загруженные датасеты</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="todo-list">
+
+                  {% for file in filelist %}
+                        <li>
+                          <!-- drag handle -->
+                              <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                              </span>
+                          <!-- todo text -->
+                          <a href="{% url 'predict_model_controller:svc_model' file_path=file %}" class="main__product-a">
+                          <span class="text">{{ file }}</span></a>
+                          <!-- General tools such as edit or delete-->
+                          <div class="tools">
+                            <i class="fa fa-edit"></i>
+                            <i class="fa fa-trash-o"></i>
+                          </div>
+                     </li>
+
+                  {% endfor %}
+
+                </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix no-border">
+              <form action="upload"
+                  class="dropzone"
+                  id="my-dropzone" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              </form>
+            </div>
+
+          </div>
+          <!-- /.box -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
+        <div class="box box-success">
+            <div class="box-header">
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">Обработанные датасеты</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="todo-list">
+
+                  {% for processed_file in processed_filelist %}
+                      <li>
+                          <!-- drag handle -->
+                              <span class="handle">
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                              </span>
+                          <!-- todo text -->
+                          <a href="{% url 'predict_model_controller:svc_model' file_path=processed_file %}" class="main__product-a">
+                          <span class="text">{{ processed_file }}</span></a>
+                          <!-- General tools such as edit or delete-->
+                          <div class="tools">
+                            <i class="fa fa-edit"></i>
+                            <i class="fa fa-trash-o"></i>
+                          </div>
+                     </li>
+                  {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <!-- /.box -->
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+{% endblock %}
