@@ -14,8 +14,6 @@ class DataProcessForm(forms.Form):
                                                                 widget=forms.CheckboxSelectMultiple(
                                                                     attrs={"class": "checkbox dataprocess_radio"}))
 
-    personal_choices = [("Обработать персональные данные", "Обработать персональные данные"),
-                        ("Не обрабатывать персональные данные", "Не обрабатывать персональные данные")]
     missing_choices = [("Заменить медианой признака для числовых, категорией "
                         "\"Нет\" для категориальных признаков", "Заменить медианой признака для числовых, категорией "
                                                                 "\"Нет\" для категориальных признаков"),
@@ -31,8 +29,6 @@ class DataProcessForm(forms.Form):
                       ("Не удалять факультативы", "Не удалять факультативы")]
     not_inf_choices = [("Обработать неинформативные признаки", "Обработать неинформативные признаки"),
                        ("Не обрабатывать неинформативные признаки", "Не обрабатывать неинформативные признаки")]
-    personal = forms.ChoiceField(choices=personal_choices, widget=forms.RadioSelect(
-        attrs={"class": "radio dataprocess_radio"}))
     missing = forms.ChoiceField(choices=missing_choices, widget=forms.RadioSelect(
         attrs={"class": "radio dataprocess_radio"}))
     outlayers = forms.ChoiceField(choices=outlayers_choices, widget=forms.RadioSelect(

@@ -103,7 +103,6 @@ def pdf_report(dataset_filepath: str):
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle(name='Justify', alignment=TA_JUSTIFY, fontName='Times', fontSize=11))
     styles.add(ParagraphStyle(name='Justify-Bold', alignment=TA_JUSTIFY, fontName='Times-Bold'))
-    bold_style = styles['Justify-Bold']
     normal_style = styles['Justify']
     doc_title = copy.copy(styles["Heading1"])
     doc_title.alignment = TA_LEFT
@@ -115,20 +114,6 @@ def pdf_report(dataset_filepath: str):
     story.append(Spacer(1, 10))
     title1 = "Статистика по характеристикам студентов за х семестр у года"
     story.append(Paragraph(title1, doc_title))
-
-    result_table_style = TableStyle([
-        ('FONT', (0, 0), (-1, -1), 'Times-Bold', 10),
-        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-        ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
-        ('BACKGROUND', (0, 0), (15, -2), colors.lightgrey),
-    ])
-
-    normal_table_style = TableStyle([
-        ('FONT', (0, 0), (-1, -1), 'Times', 10),
-        ('ALIGN', (0, 0), (0, -1), 'CENTRE'),
-        ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE')
-    ])
 
     data = df_describe(df)
     table = Table(data)

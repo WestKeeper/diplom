@@ -1,9 +1,8 @@
-import os
+from django.shortcuts import redirect
+from django.shortcuts import render
 
-from django.shortcuts import render, HttpResponse, redirect
-from django.urls import reverse
-
-from .forms import DataProcessForm, DatasetForm
+from .forms import DataProcessForm
+from .forms import DatasetForm
 
 import numpy as np
 import pandas as pd
@@ -39,11 +38,6 @@ def dataprocess(request, file_name):
             name_without_ext = ''
             for element in temp_list:
                 name_without_ext += element
-
-            # if statements
-            if form.cleaned_data['personal'] == "Обработать персональные данные":
-                encode_personal_data(df)
-                name_without_ext += f'-EPD'
 
             if form.cleaned_data['linear_dep'] == "Исключить линейные зависимости":
                 delete_linear_dependencies(df)
@@ -88,11 +82,11 @@ def dataprocess(request, file_name):
                         numeric_cols.remove(col)
                 name_without_ext += f'-HDUC'
 
-
             # automatic not-informative columns processing
             if form.cleaned_data['not_inf'] == "Обработать неинформативные признаки":
                 unnecessary_cols_list = ['Дата рождения', 'Всего', 'Положительных', 'Неудовлетворительных',
-                                         'Группа', 'Страна', 'Дисциплина по которым получены неудовлетворительные оценки',
+                                         'Группа', 'Страна',
+                                         'Дисциплина по которым получены неудовлетворительные оценки',
                                          'Индекс студента', 'Выпуск. школа',
                                          'Всего часов по дисциплинам по которым получены неудовлетворительные оценки',
                                          'Пропусков по дисциплинам по которым получены неудовлетворительные оценки',
@@ -216,21 +210,6 @@ def create_target_vars(df):
             return 0
 
     df['Класс'] = df['Успешность'].apply(classify)
-
-
-# def dataprocess(request):
-#     filelist = os.listdir(path='uploads/datasets')
-#     processed_filelist = os.listdir(path='uploads/processed_datasets')
-#     filelist += processed_filelist
-#     if request.method == 'POST':
-#         form = DataProcessForm(request.POST)
-#         if form.is_valid():
-#             return render(request, 'filelist.html', {'form': form, 'filelist': filelist})
-#         else:
-#             return render(request, 'dataprocess.html', {'form': form, 'filelist': filelist})
-#     else:
-#         form = DataProcessForm
-#         return render(request, 'dataprocess.html', {'form': form, 'filelist': filelist})
 
 
 def process_result(request):

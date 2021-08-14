@@ -1,20 +1,5 @@
-import os
-
 from django import forms
 from django.forms import TextInput
-
-
-class DDatasetForm(forms.Form):
-    educ_form_choices = [("Заочная", "Заочная"),
-                         ("Очная", "Очная"),
-                         ("Очно-заочная", "Очно-заочная")]
-    educ_form = forms.ChoiceField(choices=educ_form_choices,
-                                  widget=forms.Select(attrs={'class': 'form-control select2'}))
-    # dataset_list = os.listdir(path='uploads/datasets')
-    # dataset_choices = zip(dataset_list, dataset_list)
-    #
-    # dataset = forms.ChoiceField(choices=dataset_choices, widget=forms.RadioSelect(
-    #     attrs={"class": "radio dataprocess_radio"}))
 
 
 class ModelPredictForm(forms.Form):
@@ -188,9 +173,5 @@ class ModelPredictForm(forms.Form):
     gender = forms.ChoiceField(choices=gender_choices, widget=forms.Select(attrs={'class': 'form-control select2'}))
     vacation = forms.ChoiceField(choices=vacation_choices, widget=forms.Select(attrs={'class': 'form-control select2'}))
 
-    # fail_missings = forms.CharField(
-    #     widget=TextInput(attrs={'type': 'number', 'class': 'form-control', 'placeholder': '24'}))
-    # total_missings = forms.CharField(
-    #     widget=TextInput(attrs={'type': 'number', 'class': 'form-control', 'placeholder': '60'}))
     educ_hours = forms.CharField(
         widget=TextInput(attrs={'type': 'number', 'class': 'form-control', 'placeholder': '408'}))

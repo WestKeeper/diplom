@@ -1,6 +1,4 @@
 from django.conf.urls import url
-from django.contrib import admin
-from django.urls import path
 from data_visualizer import views
 
 app_name = 'data_visualizer'
