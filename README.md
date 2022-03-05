@@ -1,2 +1,2 @@
 # diplom
-diplom web-app repository
+diploma web-app repository
